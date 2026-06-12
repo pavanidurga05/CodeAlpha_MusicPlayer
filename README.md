@@ -32,7 +32,7 @@ CodeAlpha_MusicPlayer/
 
 ## Live Demo
 
-(Add your Netlify link here)
+https://codeaplha-musicplayer.netlify.app/
 
 ## Author
 
