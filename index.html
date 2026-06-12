@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musicify - Premium Music Player</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-music"></i>
+            <h2>Musicify</h2>
+        </div>
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <input
+                type="text"
+                id="search"
+                placeholder="Search songs...">
+
+        </div>
+
+        <p id="search-message"></p>
+
+        <!-- PLAYLIST -->
+
+        <div class="playlist-section">
+
+            <h3>Playlist</h3>
+
+            <ul id="playlist"></ul>
+
+        </div>
+
+    </aside>
+
+    <!-- MAIN PLAYER -->
+
+    <main class="player">
+
+        <!-- NOW PLAYING -->
+
+        <p class="now-playing">
+            Now Playing
+        </p>
+
+        <!-- COVER -->
+
+        <div class="cover-section">
+
+            <img
+                id="cover"
+                src="images/cover1.jpg"
+                alt="Album Cover">
+
+        </div>
+
+        <!-- SONG DETAILS -->
+
+        <div class="song-details">
+
+            <div class="title-row">
+
+                <h1 id="title">
+                    Select a Song
+                </h1>
+
+                <!-- FAVORITE -->
+
+                <button
+                    id="favorite"
+                    class="icon-btn favorite-btn"
+                    title="Favorite">
+
+                    <i class="fa-regular fa-heart"></i>
+
+                </button>
+
+            </div>
+
+            <p id="artist">
+                Musicify Studio
+            </p>
+
+        </div>
+
+        <!-- PROGRESS -->
+
+        <div class="progress-section">
+
+            <div class="time">
+
+                <span id="current-time">
+                    0:00
+                </span>
+
+                <span id="duration">
+                    0:00
+                </span>
+
+            </div>
+
+            <input
+                type="range"
+                id="progress"
+                min="0"
+                max="100"
+                value="0">
+
+        </div>
+
+        <!-- CONTROLS -->
+
+        <div class="controls">
+
+            <!-- SHUFFLE -->
+
+            <button
+                id="shuffle"
+                class="icon-btn"
+                title="Shuffle">
+
+                <i class="fa-solid fa-shuffle"></i>
+
+            </button>
+
+            <!-- PREVIOUS SONG -->
+
+            <button
+                id="prev"
+                class="icon-btn"
+                title="Previous Song">
+
+                <i class="fa-solid fa-backward-step"></i>
+
+            </button>
+
+            <!-- PLAY / PAUSE -->
+
+            <button
+                id="play"
+                class="play-btn"
+                title="Play / Pause">
+
+                <i class="fa-solid fa-play"></i>
+
+            </button>
+
+            <!-- NEXT SONG -->
+
+            <button
+                id="next"
+                class="icon-btn"
+                title="Next Song">
+
+                <i class="fa-solid fa-forward-step"></i>
+
+            </button>
+
+            <!-- REPEAT -->
+
+            <button
+                id="repeat"
+                class="icon-btn"
+                title="Repeat">
+
+                <i class="fa-solid fa-repeat"></i>
+
+            </button>
+
+        </div>
+
+        <!-- VOLUME -->
+
+        <div class="volume-container">
+
+            <i class="fa-solid fa-volume-high"></i>
+
+            <input
+                type="range"
+                id="volume"
+                min="0"
+                max="100"
+                value="100">
+
+        </div>
+
+    </main>
+
+    <!-- LYRICS PANEL -->
+
+    <section class="lyrics-panel">
+
+        <h3>Lyrics</h3>
+
+        <div id="lyrics-container">
+
+            <p class="lyric-line">
+                Select a song to view lyrics...
+            </p>
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- AUDIO -->
+
+<audio id="audio"></audio>
+
+<script src="script.js"></script>
+
+</body>
+</html>
