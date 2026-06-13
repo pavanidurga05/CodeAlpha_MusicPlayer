@@ -331,61 +331,90 @@ border-radius:10px;
 
 /* RESPONSIVE */
 
-@media(max-width:1200px){
+/* =========================
+RESPONSIVE DESIGN
+========================= */
 
-```
+@media (max-width:1200px){
+
 .lyrics-panel{
-    display:none;
+display:none;
 }
 
 #cover{
-    width:260px;
-    height:260px;
-}
-```
-
+width:260px;
+height:260px;
 }
 
-@media(max-width:900px){
+}
 
-```
+@media (max-width:900px){
+
 body{
-    overflow:auto;
+overflow:auto;
 }
 
 .app{
-    flex-direction:column;
-    height:auto;
+flex-direction:column;
+height:auto;
 }
 
 .sidebar{
-    width:100%;
-    border-right:none;
-    border-bottom:1px solid #1f1f1f;
+width:100%;
+padding:20px;
+border-right:none;
+border-bottom:1px solid #1f1f1f;
 }
 
-.song-details h1{
-    font-size:30px;
+.player{
+padding:30px 20px;
 }
 
 #cover{
-    width:220px;
-    height:220px;
+width:220px;
+height:220px;
+}
+
+.song-details h1{
+font-size:32px;
+}
+
+.song-details p{
+font-size:16px;
+}
+
+.progress-section{
+max-width:100%;
 }
 
 .controls{
-    gap:10px;
+gap:10px;
+flex-wrap:wrap;
 }
 
 .icon-btn{
-    width:50px;
-    height:50px;
+width:50px;
+height:50px;
+font-size:18px;
 }
 
 .play-btn{
-    width:70px;
-    height:70px;
+width:70px;
+height:70px;
+font-size:24px;
 }
-```
 
-}...once check complete code everythis is oky or nott 
+.favorite-btn{
+width:50px;
+height:50px;
+}
+
+.volume-container{
+width:100%;
+}
+
+#volume{
+width:200px;
+}
+
+}
