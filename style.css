@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. Design Tokens & Global Root Variable Parameters
+   1. Design Tokens & Core Theme Settings
    ========================================================================== */
 :root {
     --bg-dark-matte: #090909;
@@ -13,7 +13,7 @@
 }
 
 /* ==========================================================================
-   2. Reset & Baselines Structural Shells
+   2. Core Resets & Layout Rules
    ========================================================================== */
 * {
     margin: 0;
@@ -30,82 +30,68 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    min-height: 100dvh;
     overflow: hidden;
 }
 
+/* The parent shell container */
 .app-container {
     background-color: #000000;
     display: flex;
     flex-direction: column;
     position: relative;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-    border: 1px solid #1a1a1a;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85);
     overflow: hidden;
 }
 
 .hidden { display: none !important; }
 
 /* ==========================================================================
-   3. Global Application Header & Contextual Overlays
+   3. App Header Bar
    ========================================================================== */
 .app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 24px 12px;
+    padding: 20px 24px 10px;
     z-index: 10;
+    flex-shrink: 0;
 }
-
 .menu-icon, .header-fav-icon {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     cursor: pointer;
     color: var(--text-primary);
     padding: 4px;
     transition: var(--transition-smooth);
 }
-
 .menu-icon:hover, .header-fav-icon:hover { color: var(--spotify-green); }
-.brand { display: flex; align-items: center; gap: 8px; }
+.brand { display: flex; align-items: center; gap: 10px; }
 .header-logo { color: var(--spotify-green); font-size: 1.5rem; }
 .brand span { font-weight: 700; font-size: 1.2rem; letter-spacing: -0.5px; }
 
+/* Dropdown Context Card */
 .header-action-wrapper { position: relative; display: inline-block; }
 .options-dropdown {
     position: absolute;
-    top: 35px;
-    right: 0;
+    top: 40px; right: 0;
     background-color: #181818;
     border: 1px solid #282828;
-    border-radius: 8px;
-    width: 160px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.6);
-    z-index: 100;
-    overflow: hidden;
+    border-radius: 8px; width: 160px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+    z-index: 100; overflow: hidden;
 }
-.dropdown-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
+.dropdown-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; font-size: 0.85rem; cursor: pointer; }
 .dropdown-item:hover { background-color: var(--bg-card-hover); color: var(--spotify-green); }
 
-/* Left Hand Sliding Drawer Component Layouts */
+/* Left Drawer Menu Panel Components */
 .side-drawer {
     position: absolute;
-    top: 0;
-    left: -280px;
-    width: 280px;
-    height: 100%;
+    top: 0; left: -280px;
+    width: 280px; height: 100%;
     background-color: #0b0b0b;
-    border-right: 1px solid #1a1a1a;
-    z-index: 200;
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
+    border-right: 1px solid #181818;
+    z-index: 200; padding: 24px;
+    display: flex; flex-direction: column;
     transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .side-drawer.open { left: 0; }
@@ -120,150 +106,250 @@ body {
 .drawer-overlay {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.6);
-    z-index: 150; opacity: 0; pointer-events: none;
+    background-color: rgba(0,0,0,0.6); z-index: 150;
+    opacity: 0; pointer-events: none;
     transition: opacity 0.3s ease;
 }
 .drawer-overlay.visible { opacity: 1; pointer-events: auto; }
 
 /* ==========================================================================
-   4. Main Content Frame Routing Views Pipeline
+   4. Middle Workspace Section (Fluid & Balanced)
    ========================================================================== */
-.main-content { flex: 1; overflow-y: auto; }
-.main-content::-webkit-scrollbar { display: none; }
-.view-section { animation: slideUp 0.35s ease-out; }
-@keyframes slideUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-.view-title { font-size: 1.75rem; margin-bottom: 20px; font-weight: 700; }
-.sub-view-title { font-size: 0.85rem; color: var(--text-muted); margin: 24px 0 12px; text-transform: uppercase; }
-
-/* Now Playing Base Deck Configurations */
-.now-playing-container { display: flex; flex-direction: column; align-items: center; }
-.section-subtitle { color: var(--spotify-green); font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; margin-bottom: 24px; }
-
-.cover-art-wrapper { 
-    border-radius: 24px; 
-    overflow: hidden; 
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+.main-viewport-wrapper {
+    flex: 1;
+    width: 100%;
+    overflow-y: auto;
+    /* Explicit padding clears out the bottom navbar real estate */
+    padding-bottom: 75px; 
 }
-.cover-art-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+.main-viewport-wrapper::-webkit-scrollbar { display: none; }
 
-.track-meta { display: flex; width: 100%; justify-content: space-between; align-items: center; margin-bottom: 24px; }
-.track-info h2 { font-size: 1.45rem; margin-bottom: 4px; }
+.main-content {
+    width: 100%;
+    height: 100%;
+}
+
+.view-section {
+    width: 100%;
+    height: 100%;
+    animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* Player UI Layout System */
+.now-playing-container { 
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding: 5px 28px 15px;
+}
+
+.section-subtitle { 
+    color: var(--text-muted); 
+    font-size: 0.75rem; 
+    font-weight: 700; 
+    letter-spacing: 2px; 
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Beautiful responsive scaling for Album Art */
+.cover-art-wrapper { 
+    width: 100%;
+    max-width: 270px; /* Reduced from 320px to compress vertically layout seamlessly */
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    border-radius: 12px; 
+    overflow: hidden; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+.cover-art-wrapper img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
+}
+
+/* Metadata Track Layout Rows */
+.track-meta { 
+    display: flex; 
+    width: 100%; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: 20px;
+}
+.track-info h2 { font-size: 1.4rem; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.3px; }
 .track-info p { color: var(--text-muted); font-size: 0.95rem; }
 .control-btn-raw { background: none; border: none; outline: none; }
-.like-btn { font-size: 1.45rem; cursor: pointer; color: var(--text-primary); transition: var(--transition-smooth); }
+.like-btn { font-size: 1.4rem; cursor: pointer; color: var(--text-primary); transition: var(--transition-smooth); }
 .like-btn.liked { color: var(--heart-pink) !important; font-weight: 900; }
 
-/* Track Range Squeeze Knobs Sliders */
-.progress-container { display: flex; width: 100%; align-items: center; gap: 12px; font-size: 0.75rem; color: var(--text-muted); margin-bottom: 28px; }
-input[type="range"] { flex: 1; -webkit-appearance: none; appearance: none; background: #282828; height: 4px; border-radius: 2px; outline: none; cursor: pointer; }
-input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--text-primary); }
+/* Audio Controls Grouping Box */
+.player-controls-group {
+    width: 100%;
+    margin-top: auto;
+}
+
+/* Timeline Track Rails */
+.progress-container { 
+    display: flex; 
+    width: 100%; 
+    align-items: center; 
+    gap: 12px; 
+    font-size: 0.75rem; 
+    color: var(--text-muted); 
+    margin-top: 15px;
+}
+input[type="range"] { 
+    flex: 1; 
+    -webkit-appearance: none; 
+    appearance: none; 
+    background: #282828; 
+    height: 4px; 
+    border-radius: 2px; 
+    outline: none; 
+    cursor: pointer; 
+}
+input[type="range"]::-webkit-slider-thumb { 
+    -webkit-appearance: none; 
+    appearance: none; 
+    width: 12px; 
+    height: 12px; 
+    border-radius: 50%; 
+    background: var(--text-primary); 
+    transition: transform 0.1s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
 #progress-bar { background: linear-gradient(to right, var(--spotify-green) 0%, #282828 0%); }
 
-.controls-container { display: flex; width: 100%; justify-content: space-between; align-items: center; margin-bottom: 28px; }
-.control-btn { background: none; border: none; color: var(--text-muted); font-size: 1.25rem; cursor: pointer; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; }
+/* Action Playback Buttons */
+.controls-container { 
+    display: flex; 
+    width: 100%; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-top: 15px;
+}
+.control-btn { 
+    background: none; 
+    border: none; 
+    color: var(--text-muted); 
+    font-size: 1.3rem; 
+    cursor: pointer; 
+    width: 44px; 
+    height: 44px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    transition: var(--transition-smooth);
+}
 .control-btn:hover { color: var(--text-primary); }
 .shuffle-active, .repeat-active { color: var(--spotify-green) !important; }
-.seq-btn { color: var(--text-primary); font-size: 1.45rem; }
+.seq-btn { color: var(--text-primary); font-size: 1.5rem; }
 .play-master { color: var(--text-primary); font-size: 3.5rem; width: 64px; height: 64px; }
-.play-master:hover { transform: scale(1.04); color: var(--spotify-green); }
-.volume-container { display: flex; align-items: center; gap: 12px; width: 80%; color: var(--text-muted); }
+.play-master:hover { transform: scale(1.05); color: var(--spotify-green); }
+
+/* Volume Management Sliders */
+.volume-container { 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    gap: 12px; 
+    width: 100%; 
+    color: var(--text-muted); 
+    font-size: 0.9rem; 
+    margin-top: 15px;
+    padding: 0 10px;
+}
+.volume-container input { max-width: 150px; }
 
 /* ==========================================================================
-   5. Dynamic Lists Node Elements Rows
+   5. Secondary Panel Content Modules (Lists & Playlists)
    ========================================================================== */
-.search-box { position: relative; width: 100%; margin-bottom: 16px; }
-.search-box input { width: 100%; background-color: var(--bg-card-base); border: none; padding: 14px 14px 14px 44px; border-radius: 12px; color: #fff; outline: none; }
-.search-box i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
-.song-list-container { display: flex; flex-direction: column; gap: 8px; }
-.song-row-item { display: flex; align-items: center; background-color: var(--bg-card-base); padding: 10px 12px; border-radius: 12px; cursor: pointer; }
-.song-row-item.active { background-color: #142419; }
+.view-title { font-size: 1.75rem; margin-bottom: 20px; font-weight: 700; padding: 10px 4px 0; }
+.sub-view-title { font-size: 0.85rem; color: var(--text-muted); margin: 24px 0 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.search-box { position: relative; width: 100%; margin-bottom: 20px; padding: 0 4px; }
+.search-box input { width: 100%; background-color: var(--bg-card-base); border: none; padding: 14px 14px 14px 46px; border-radius: 8px; color: #fff; outline: none; font-size: 0.95rem; }
+.search-box i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1rem; }
+
+.song-list-container { display: flex; flex-direction: column; gap: 10px; padding: 0 4px; }
+.song-row-item { display: flex; align-items: center; background-color: var(--bg-card-base); padding: 12px; border-radius: 8px; cursor: pointer; transition: background 0.2s; }
+.song-row-item:hover { background-color: var(--bg-card-hover); }
+.song-row-item.active { background-color: #0d1e13; }
 .song-row-item.active .row-title { color: var(--spotify-green); }
-.row-img { width: 46px; height: 46px; border-radius: 6px; object-fit: cover; margin-right: 14px; }
+.row-img { width: 48px; height: 48px; border-radius: 6px; object-fit: cover; margin-right: 16px; }
 .row-details { flex: 1; }
-.row-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+.row-title { font-size: 0.95rem; font-weight: 600; margin-bottom: 3px; }
 .row-artist { font-size: 0.8rem; color: var(--text-muted); }
-.row-action-icon { color: var(--text-muted); padding: 6px; font-size: 0.95rem; }
+.row-action-icon { color: var(--text-muted); padding: 6px; font-size: 1rem; }
 .row-action-icon.liked-active { color: var(--heart-pink); }
 
-/* Playlist Folders Containers */
-.playlist-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.playlist-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; padding: 10px 4px 0; }
 .add-playlist-btn { font-size: 1.4rem; color: var(--spotify-green); cursor: pointer; }
-.playlist-folder-container { display: flex; flex-direction: column; gap: 12px; }
-.folder-item { display: flex; align-items: center; background-color: var(--bg-card-base); padding: 12px 14px; border-radius: 14px; }
-.folder-icon-box { width: 44px; height: 44px; background-color: #16241a; border-radius: 10px; display: flex; justify-content: center; align-items: center; margin-right: 14px; color: var(--spotify-green); }
-.folder-item:nth-child(2) .folder-icon-box { color: #4285F4; background-color: #141f2e; }
+.playlist-folder-container { display: flex; flex-direction: column; gap: 12px; padding: 0 4px; }
+.folder-item { display: flex; align-items: center; background-color: var(--bg-card-base); padding: 14px; border-radius: 8px; }
+.folder-icon-box { width: 44px; height: 44px; background-color: #142218; border-radius: 6px; display: flex; justify-content: center; align-items: center; margin-right: 16px; color: var(--spotify-green); font-size: 1.1rem; }
 .folder-meta { flex: 1; }
-.folder-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
-.folder-count { font-size: 0.78rem; color: var(--text-muted); }
-.folder-drag-handle { color: #2a2a2a; }
+.folder-name { font-size: 0.95rem; font-weight: 600; margin-bottom: 3px; }
+.folder-count { font-size: 0.8rem; color: var(--text-muted); }
 
-/* Fixed Footer Navigation Tab Core */
+/* ==========================================================================
+   6. Absolute Position Bottom Navigation Dock (Perfect Fit Solution)
+   ========================================================================== */
 .bottom-nav { 
     display: flex; 
     justify-content: space-around; 
-    background-color: #0a0a0a; 
-    border-top: 1px solid #141414; 
-    padding: 12px 0 calc(12px + env(safe-area-inset-bottom, 16px)); /* Fixes device bottom gesture bar conflicts */
-    position: absolute; 
-    bottom: 0; 
-    left: 0; 
+    background-color: rgba(12, 12, 12, 0.96); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-top: 1px solid #181818; 
+    padding: 10px 0 calc(10px + env(safe-area-inset-bottom, 0px)); 
     width: 100%; 
-    z-index: 20; 
+    z-index: 110;
+    
+    /* Anchors bottom menu explicitly inside layout container */
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
-.nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-size: 0.7rem; cursor: pointer; gap: 4px; width: 60px; }
-.nav-item i { font-size: 1.25rem; }
+.nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); font-size: 0.72rem; cursor: pointer; gap: 4px; width: 70px; transition: color 0.2s; }
+.nav-item i { font-size: 1.3rem; }
 .nav-item.active { color: var(--spotify-green); }
+.nav-item:hover { color: var(--text-primary); }
 
-/* Initial Animated Screen Preloader Splash */
+/* Splash Screen Component */
 .splash-screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: #000; display: flex; justify-content: center; align-items: center; z-index: 999; text-align: center; }
 .logo-container { display: flex; flex-direction: column; align-items: center; }
-.splash-logo { font-size: 5rem; color: var(--spotify-green); margin-bottom: 12px; }
+.splash-logo { font-size: 4.5rem; color: var(--spotify-green); margin-bottom: 12px; }
 .splash-screen h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 4px; }
-.splash-screen p { color: var(--spotify-green); font-size: 0.85rem; letter-spacing: 1.5px; margin-bottom: 32px; }
-.spinner { width: 32px; height: 32px; border: 3px solid rgba(255,255,255,0.05); border-left-color: var(--spotify-green); border-radius: 50%; animation: spin 0.8s linear infinite; }
-@keyframes spin { to { transform: rotate(360deg); } }
-.loading-text { color: var(--text-muted); font-size: 0.75rem; }
+.splash-screen p { color: var(--spotify-green); font-size: 0.85rem; letter-spacing: 2px; }
 
 /* ==========================================================================
-   6. ADVANCED RESPONSIVE MEDIA PIPELINES (Desktop vs Phone Viewport Adjustments)
+   7. Device Specific Responsive Optimization Rules
    ========================================================================== */
 @media (max-width: 450px) {
     .app-container {
         width: 100vw;
         height: 100vh;
-        height: 100dvh; /* Enforces absolute responsive mobile browser window compliance */
-        border: none;
+        height: 100dvh; 
     }
-    
-    /* Dynamically scales cover dimensions down to free up layout text boundaries */
     .cover-art-wrapper {
-        width: 62vw;
-        height: 62vw;
-        max-width: 250px;
-        max-height: 250px;
-        margin-bottom: 20px;
+        max-width: 74vw; 
     }
-    
-    .section-subtitle { margin-bottom: 16px; }
-    .track-meta { margin-bottom: 16px; }
-    .progress-container { margin-bottom: 18px; }
-    .controls-container { margin-bottom: 18px; }
-    .main-content { padding: 8px 20px 110px; }
 }
 
 @media (min-width: 451px) {
     .app-container { 
-        border-radius: 32px; 
-        width: 430px;
-        height: 880px;
-    }
-    .cover-art-wrapper { 
-        width: 290px; 
-        height: 290px; 
-        margin-bottom: 32px;
-    }
-    .main-content { 
-        padding: 12px 24px 90px; 
+        border-radius: 24px; 
+        width: 395px;
+        /* Balanced container height stops taskbar overflow bugs */
+        height: 700px; 
+        border: 1px solid #222;
+        margin-bottom: 20px; 
     }
 }
