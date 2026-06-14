@@ -30,8 +30,8 @@ body {
 .app-container {
     width: 100vw;
     height: 100vh;
+    height: 100dvh; /* FIX: Uses Dynamic Viewport Height to account for mobile address bars */
     max-width: 430px;
-    max-height: 880px;
     background-color: #000000;
     display: flex;
     flex-direction: column;
@@ -42,7 +42,11 @@ body {
 }
 
 @media (min-width: 450px) {
-    .app-container { border-radius: 32px; }
+    .app-container {
+         border-radius: 32px; 
+         max-height: 880px; 
+    
+    }
 }
 
 .hidden { display: none !important; }
