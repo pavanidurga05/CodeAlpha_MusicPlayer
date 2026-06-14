@@ -33,32 +33,16 @@ A modern premium music player web application built from scratch using **HTML5, 
 
 ## 📂 Project Structure
 
+CodeAlpha_MusicPlayer
 
-CodeAlpha_MusicPlayer/
-│
-├── index.html       # Core application HTML document shell
-├── style.css        # Design tokens, layouts, and responsive media rules
-├── script.js        # Event pipelines and application logic engine
-│
-├── images/          # Project album artwork assets
-│   ├── cover1.jpg
-│   ├── cover2.jpg
-│   ├── cover3.jpg
-│   ├── cover4.jpg
-│   ├── cover5.jpg
-│   ├── cover6.jpg
-│   └── cover7.jpg
-│
-├── songs/           # Local audio stream source files (.mp3 format)
-│   ├── song1.mp3
-│   ├── song2.mp3
-│   ├── song3.mp3
-│   ├── song4.mp3
-│   ├── song5.mp3
-│   ├── song6.mp3
-│   └── song7.mp3
-│
-└── README.md        # Documentation file
+├── index.html
+├── style.css
+├── script.js
+
+├── images/
+
+├── songs/
+
 
 
 ## 🚀 Live Demo
